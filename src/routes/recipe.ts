@@ -4,8 +4,8 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/recipe", (req, res) => {});
+router.get("/", (req, res) => {});
 
-router.post("/recipe", (req, res) => {});
+router.post("/", (req, res) => {});
 
 export default router;
