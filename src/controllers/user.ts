@@ -1,24 +1,25 @@
 import { RequestHandler } from "express";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
+import User from "../models/User";
 
 export const signIn: RequestHandler = async (req, res, next) => {
     const { email, password, action } = req.body.user; // action if true - login, else signup
-
-    console.log(action);
     let success;
     let message;
     let userId;
 
     // LOGIN
     if (action) {
-        // SALĪDZINĀT DATUS AR DATUBĀZI
-        let userEmail = "martins.meisters@inbox.lv";
-        let userPassword = "123";
-
-        if (email === userEmail && password === userPassword) {
-            success = true;
-            message = "Success on signing in.";
-            userId = uuidv4();
+        const findUser = await User.findOne({ email: email });
+        if (findUser) {
+            if (findUser.password === password) {
+                success = true;
+                message = "Success on signing in.";
+                userId = String(findUser._id);
+            } else {
+                success = false;
+                message = "Failed to login! Check you credentials.";
+            }
         } else {
             success = false;
             message = "Failed to login! Check you credentials.";
@@ -40,15 +41,19 @@ export const signIn: RequestHandler = async (req, res, next) => {
 
     // REGISTER
     if (!action) {
-        let userEmail = "martins.meisters@inbox.lv";
-        // PĀRBAUDĪT DB DATUS
-        // * vai mails jau nav reģistrēts, ja ir tad errors, ja nav tad piereģistrēt useru
-        if (email === userEmail) {
+        const userEmailExists = await User.findOne({ email: email });
+
+        if (userEmailExists) {
             success = false;
             message = "Email already exists!";
         } else {
+            const userToSave = new User({
+                email,
+                password,
+            });
+            await userToSave.save();
             success = true;
-            userId = "UserId1000";
+            userId = String(userToSave._id);
             message = "Success on signup!";
         }
 

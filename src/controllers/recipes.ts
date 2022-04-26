@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import Recipe from "../models/Recipes";
 
 export const createRecipe: RequestHandler = (req, res, next) => {};
 

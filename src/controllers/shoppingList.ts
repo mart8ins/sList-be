@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import ShoppingList from "../models/ShoppingList";
 
 export const createShoppingList: RequestHandler = (req, res, next) => {};
 
