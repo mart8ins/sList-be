@@ -4,6 +4,7 @@ import express, { Request, Response, NextFunction } from "express";
 import recipeRoutes from "./routes/recipe";
 import shoppingListRoutes from "./routes/shoppingList";
 import userRoutes from "./routes/user";
+import groceriesRoutes from "./routes/groceries";
 import cors from "cors";
 import mongoose from "mongoose";
 
@@ -16,6 +17,7 @@ app.use(cors());
 app.use("/recipe", recipeRoutes);
 app.use("/shoppingList", shoppingListRoutes);
 app.use("/user", userRoutes);
+app.use("/groceries", groceriesRoutes);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     res.status(500).json({ message: err.message });

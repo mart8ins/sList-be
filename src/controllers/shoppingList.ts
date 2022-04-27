@@ -6,7 +6,7 @@ export const createShoppingList: RequestHandler = async (req, res, next) => {
     if (list) {
         const newList = new ShoppingList(list);
         const listSaved = await newList.save();
-        const allLists = await ShoppingList.find({}); // all lists to update client list context
+        const allLists = await ShoppingList.find({ authorId: list.authorId }); // all lists to update client list context
 
         res.json({
             message: "List saved",
