@@ -1,11 +1,14 @@
 import { Router } from "express";
 // const express = require("express");
 // const Router = express.Router;
+import { createRecipe, getRecipes, deleteRecipe } from "../controllers/recipes";
 
 const router = Router();
 
-router.get("/", (req, res) => {});
+router.get("/", getRecipes);
 
-router.post("/", (req, res) => {});
+router.post("/", createRecipe);
+
+router.post("/delete", deleteRecipe);
 
 export default router;

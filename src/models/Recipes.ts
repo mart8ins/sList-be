@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 
 interface Recipe {
-    id: string;
+    // id: string;
     authorId: string;
     recipeTitle: string;
     preperation: string;
@@ -10,13 +10,14 @@ interface Recipe {
 }
 
 const recipeSchema = new Schema<Recipe>({
-    id: { type: String, required: true },
+    // id: { type: String, required: true },
     authorId: { type: String, required: true },
     recipeTitle: { type: String, required: true },
     preperation: { type: String, required: true },
     cals: { type: String, required: true },
     recipeGroceriesList: [
         {
+            _id: false,
             id: { type: String, required: true },
             grocery: { type: String, required: true },
             quantity: { type: String, required: true },
