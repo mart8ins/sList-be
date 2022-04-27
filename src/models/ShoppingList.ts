@@ -1,7 +1,6 @@
 import { Schema, model } from "mongoose";
 
 interface ShoppingList {
-    id: string;
     authorId: string;
     title: string;
     completed: boolean;
@@ -19,13 +18,13 @@ interface ShoppingList {
 }
 
 const shoppingListSchema = new Schema<ShoppingList>({
-    id: { type: String, required: true },
     authorId: { type: String, required: true },
     title: { type: String, required: true },
     completed: { type: Boolean, required: true },
     groceries: [
         {
-            id: { type: String, required: true },
+            _id: false,
+            id: { type: String },
             grocery: { type: String, required: true },
             quantity: { type: String, required: true },
             unit: { type: String, required: true },
