@@ -8,7 +8,7 @@ import groceriesRoutes from "./routes/groceries";
 import cors from "cors";
 import mongoose from "mongoose";
 
-const port = 3001;
+const port = process.env.PORT || 3001;
 
 const app = express();
 app.use(express.urlencoded({ extended: true }), express.json());
