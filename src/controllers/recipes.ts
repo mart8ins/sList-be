@@ -40,15 +40,13 @@ export const getRecipes: RequestHandler = async (req, res, next) => {
 };
 
 export const deleteRecipe: RequestHandler = async (req, res, next) => {
-    const { recipeId, authorId } = req.body;
+    const { recipeId } = req.body;
 
     const deletedRecipe = await Recipe.deleteOne({ _id: recipeId });
-    const recipeUpdate = await Recipe.find({ authorId });
 
-    if (recipeUpdate) {
+    if (deletedRecipe) {
         res.json({
             message: "Recipes updated.",
-            update: recipeUpdate,
             status: true,
         });
     } else {
